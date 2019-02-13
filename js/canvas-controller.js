@@ -2,7 +2,7 @@
 
 function onStrokeWidthChange(elRange) {
     $('.stroke-width-label').html(elRange.value)
-
+}
 var gIsFirstClick;
 var gFirstClickPos;
 var gCanvas;
@@ -22,7 +22,7 @@ function init() {
     // drawText('Have a nice day!')
 }
 
-function onCanvasClick(ev){
+function onCanvasClickclick(ev){
     // debugger;
     console.log('first click?',gIsFirstClick)
     console.log('event',ev)
