@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>page title</title>
-    <link rel="stylesheet" href="lib/bootstrap/bootstrap.css" />
+    <!-- <link rel="stylesheet" href="lib/bootstrap/bootstrap.css" /> -->
     <link rel="stylesheet" href="lib/animate/animate.css" />
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/reset.css">
@@ -33,6 +33,8 @@
             <option value="brush">Brush</option>
         </select>
         <button onclick="clearCanvas()">Clear</button>
+       <div class="save"> <a href="" class="a-save" type="button" onclick="downloadCanvas(this)">Save</a></div>
+        
     </div>
     <div class="canvas-container">
         <canvas id="our-canvas" width="500" height="400" style="border:1px solid black"
