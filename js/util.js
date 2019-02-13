@@ -1,5 +1,9 @@
-'use strict'
+function saveToStorage(key, value) {
+    var str = JSON.stringify(value);
+    localStorage.setItem(key, str);
+}
 
-//storage services
-//randint
-//randcolor
+function loadFromStorage(key) {
+    var str = localStorage.getItem(key)
+    return JSON.parse(str)
+}
