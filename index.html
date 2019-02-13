@@ -11,9 +11,24 @@
     <link rel="icon" href="img/icon.png" type="image/gif" sizes="16x16">
 </head>
 
-<body>
+<body onload="init()">
+    <div class="control-panel flex align-center space-between">
+        <label for="fill-color">
+            fill color:
+            <input type="color" name="fill-color">
+        </label>
+        <label for="stroke-color">
+            stroke color:
+            <input type="color" name="stroke-color">
+        </label>
+        <select name="shape" onchange="onChangeShape(this.value)">
+            <option value="rectangle">Rectangle</option>
+            <option value="rectangle">Oval</option>
+        </select>
+        
+    </div>
     <div class="canvas-container">
-        <canvas style="width: 100vw; height: 100vh"></canvas>
+        <canvas id="our-convas"  width="500" height="400" style="border:1px solid black" onclick="onCanvasClick(event)"></canvas>
     </div>
     <script src="js/util.js"></script>
     <script src="lib/jquery/jquery.js"></script>
