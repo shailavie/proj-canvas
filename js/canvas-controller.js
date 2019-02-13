@@ -1,28 +1,40 @@
 'use strict';
 
+var gDrawing;
 var gCoordStart;
 var gCanvas;
 var gCtx;
 
 function init() {
     document.querySelector('.stroke-width-label').innerHTML = document.querySelector('.stroke-width').value;
-    console.clear();
     gCanvas = document.querySelector('#our-canvas');
-    gCtx = gCanvas.getContext('2d')
-    gIsFirstClick = true;
-    console.log(gCtx)
+    gCtx = gCanvas.getContext('2d');
 }
 
 function clearCanvas() {
-    gCanvas.clearRect(0, 0, 500, 500)
+    console.log('clearing');
+    gCtx.clearRect(0, 0, 500, 500)
 }
 
 function onCanvasMouseDown(ev) {
+    gDrawing = true;
     saveCoords(ev.offsetX, ev.offsetY)
 }
 
 function onCanvasMouseUp(ev) {
+    gDrawing = false;
     drawShape(ev.offsetX, ev.offsetY);
+}
+
+function onMouseMove(ev) {
+    if (gDrawing && getState('shape') == 'brush') {
+        gCtx.beginPath();
+        var radius = getState('strokeWidth');
+        gCtx.arc(ev.offsetX, ev.offsetY, radius, 0, 2 * Math.PI);
+        gCtx.fillStyle = getState('strokeColor');
+        gCtx.fill();
+        gCtx.closePath();
+    }
 }
 
 function saveCoords(x, y) {
@@ -32,8 +44,6 @@ function saveCoords(x, y) {
     }
 }
 
-
-
 function drawShape(x, y) {
     var coordEnd = {
         x: x,
@@ -42,7 +52,10 @@ function drawShape(x, y) {
     gCtx.beginPath()
     gCtx.strokeStyle = getState('strokeColor')
     gCtx.lineWidth = getState('strokeWidth')
-    gCtx.fillStyle = getState('fillColor')
+    var fillColorRgbObj = hexToRgb(getState('fillColor'))
+    var fillColorRgbaStr = `rgba(${fillColorRgbObj.r}, ${fillColorRgbObj.g}, ${fillColorRgbObj.b}, ${getState('opacity')})`;
+    console.log(fillColorRgbaStr);
+    gCtx.fillStyle = fillColorRgbaStr;
     var shape = getState('shape');
     switch (shape) {
         case 'rectangle':
@@ -60,9 +73,6 @@ function drawShape(x, y) {
     gCtx.closePath()
 }
 
-
-
-
 function onStrokeColorChange(elInput) {
     updateState('strokeColor', elInput.value);
 }
@@ -78,4 +88,9 @@ function onStrokeWidthChange(elRange) {
 
 function onShapeChange(elInput) {
     updateState('shape', elInput.value);
+}
+
+function onOpacityChange(elRange) {
+    updateState('opacity', elRange.value/100);
+    document.querySelector('.opacity-label').innerHTML = (elRange.value/100);
 }

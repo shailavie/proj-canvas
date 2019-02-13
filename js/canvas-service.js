@@ -9,7 +9,8 @@ var gState = {
     strokeColor: '#000000',
     fillColor: '#ffffff',
     strokeWidth: '16',
-    shape: 'rectangle'
+    shape: 'rectangle',
+    opacity: 1
 }
 
 function saveCanvas(elCanvas) {
