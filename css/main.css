@@ -5,7 +5,8 @@
     top: 0;
     left: 50%;
     transform: translate(-50%);
-    background-color: gray;
+    background-color: white;
+    border-bottom: 1px solid gray;
     padding: 0 20px;
 }
 
@@ -28,7 +29,35 @@
 
 .canvas {
     margin: auto;    
+
+}
+
+.canvas-container {
     position: absolute;
     left: 50%;
     top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.a-save {
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+}
+
+
+.save {
+    display: flex;
+    align-items: center;justify-content: center;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    border-radius: 0.25rem;
+    background-color: #007bff;
+    font-family: sans-serif;
+    color:white;
+    border:none;
+
 }
