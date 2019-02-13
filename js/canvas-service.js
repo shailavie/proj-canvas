@@ -8,7 +8,7 @@
 var gState = {
     strokeColor: '#000000',
     fillColor: '#ffffff',
-    stroke_width: '16',
+    strokeWidth: '16',
     shape: 'rectangle'
 }
 

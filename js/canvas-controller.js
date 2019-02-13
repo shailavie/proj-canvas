@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
 
 var gIsFirstClick;
-var gFirstClickPos;
+var gCoordStart;
 var gCanvas;
 var gCtx;
 
 function init() {
-    $('.stroke-width-label').html($('.stroke-width').val())
+    document.querySelector('.stroke-width-label').innerHTML = document.querySelector('.stroke-width').value;
     console.clear();
     gCanvas = document.querySelector('#our-canvas');
     gCtx = gCanvas.getContext('2d')
@@ -19,17 +19,13 @@ function init() {
     // drawText('Have a nice day!')
 }
 
-function onStrokeWidthChange(elRange) {
-    $('.stroke-width-label').html(elRange.value)
-}
-
 function onCanvasClick(ev) {
     // debugger;
     // console.log(gIsFirstClick)
     // console.log(ev)
     if (gIsFirstClick) {
         saveCoords(ev.offsetX, ev.offsetY);
-        console.log('gFirstClickPos', gFirstClickPos)
+        console.log('gFirstClickPos', gCoordStart)
     } else {
         drawShape(ev.offsetX, ev.offsetY);
     }
@@ -37,49 +33,57 @@ function onCanvasClick(ev) {
 }
 
 function saveCoords(x, y) {
-    gFirstClickPos = {
+    gCoordStart = {
         x: x,
         y: y
     }
-    console.log(gFirstClickPos);
+    console.log(gCoordStart);
 }
+
 
 
 function drawShape(x, y) {
-    var currPos = {
+    var coordEnd = {
         x: x,
         y: y
     }
-    console.log(gFirstClickPos, currPos);
-    // gCtx.rect(gFirstClickPos.x, gFirstClickPos.y, currPos.x - gFirstClickPos.x, currPos.y - gFirstClickPos.y);
-    // var radius = a^2+b^2 = c^2
-    var radius = Math.sqrt(Math.abs(gFirstClickPos.x - currPos.x) ** 2 + Math.abs(gFirstClickPos.y - currPos.y) ** 2)
     gCtx.beginPath()
-    gCtx.arc(gFirstClickPos.x, gFirstClickPos.y, radius, 0, 2 * Math.PI);
-    gCtx.stroke()
+    gCtx.strokeStyle = getState('strokeColor')
+    gCtx.lineWidth = getState('strokeWidth')
+    gCtx.fillStyle = getState('fillColor')
+    var shape = getState('shape');
+    switch (shape) {
+        case 'rectangle':
+            gCtx.rect(gCoordStart.x, gCoordStart.y, coordEnd.x - gCoordStart.x, coordEnd.y - gCoordStart.y);
+            gCtx.stroke()
+            gCtx.fill();
+            break;
+        case 'oval':
+            var radius = Math.sqrt(Math.abs(gCoordStart.x - coordEnd.x) ** 2 + Math.abs(gCoordStart.y - coordEnd.y) ** 2)
+            gCtx.arc(gCoordStart.x, gCoordStart.y, radius, 0, 2 * Math.PI);
+            gCtx.stroke()
+            gCtx.fill();
+            break;
+    }
     gCtx.closePath()
-
 }
 
 
 
 
-function drawShape2(x, y) {
-    var currPos = {
-        x: x,
-        y: y
-    }
-    console.log(gFirstClickPos, currPos);
-    switch (getState('shape')) {
-        case 'rectangle':
-            gCtx.rect(gFirstClickPos.x, gFirstClickPos.y, currPos.x - gFirstClickPos.x, currPos.y - gFirstClickPos.y);
-            gCtx.stroke()
-        case 'oval':
-            gCtx.rect(gFirstClickPos.x, gFirstClickPos.y, currPos.x - gFirstClickPos.x, currPos.y - gFirstClickPos.y);
-            // var radius = a^2+b^2 = c^2
-            var radius = Math.sqrt(Math.abs(gFirstClickPos.x - currPos.x) ** 2 + Math.abs(gFirstClickPos.y - currPos.y) ** 2)
-         
-            gCtx.arc(gFirstClickPos.x, gFirstClickPos.y, radius, 0, 2 * Math.PI);
-            gCtx.stroke()
-    }
+function onStrokeColorChange(elInput) {
+    updateState('strokeColor', elInput.value);
+}
+
+function onFillColorChange(elInput) {
+    updateState('fillColor', elInput.value);
+}
+
+function onStrokeWidthChange(elRange) {
+    updateState('strokeWidth', elRange.value);
+    document.querySelector('.stroke-width-label').innerHTML = (elRange.value);
+}
+
+function onShapeChange(elInput) {
+    updateState('shape', elInput.value);
 }

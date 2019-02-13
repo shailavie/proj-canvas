@@ -15,17 +15,17 @@
     <div class="control-panel flex align-center space-between">
         <label for="stroke-color">
             stroke color:
-            <input type="color" name="stroke-color" value="#000000">
+            <input type="color" name="stroke-color" value="#000000" onchange="onStrokeColorChange(this)">
         </label>
         <label for="fill-color">
             fill color:
-            <input type="color" name="fill-color" value="#ffffff">
+            <input type="color" name="fill-color" value="#ffffff" onchange="onFillColorChange(this)">
         </label>
             <span class="stroke-width-label"></span>
             <input type="range" name="stroke-width" min="1" max="30" onchange="onStrokeWidthChange(this)" class="stroke-width">
-        <select name="shape" onchange="onChangeShape(this.value)">
+        <select name="shape" onchange="onShapeChange(this)">
             <option value="rectangle">Rectangle</option>
-            <option value="rectangle">Oval</option>
+            <option value="oval">Oval</option>
         </select>
         
     </div>
