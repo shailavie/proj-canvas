@@ -11,16 +11,18 @@
     <link rel="icon" href="img/icon.png" type="image/gif" sizes="16x16">
 </head>
 
-<body>
+<body onload="init()">
     <div class="control-panel flex align-center space-between">
-        <label for="fill-color">
-            fill color:
-            <input type="color" name="fill-color">
-        </label>
         <label for="stroke-color">
             stroke color:
-            <input type="color" name="stroke-color">
+            <input type="color" name="stroke-color" value="#000000">
         </label>
+        <label for="fill-color">
+            fill color:
+            <input type="color" name="fill-color" value="#ffffff">
+        </label>
+            <span class="stroke-width-label"></span>
+            <input type="range" name="stroke-width" min="1" max="30" onchange="onStrokeWidthChange(this)" class="stroke-width">
         <select name="shape" onchange="onChangeShape(this.value)">
             <option value="rectangle">Rectangle</option>
             <option value="rectangle">Oval</option>
@@ -28,7 +30,7 @@
         
     </div>
     <div class="canvas-container">
-        <canvas style="width: 100vw; height: 100vh"></canvas>
+        <canvas width="500" height="500"></canvas>
     </div>
     <script src="js/util.js"></script>
     <script src="lib/jquery/jquery.js"></script>
