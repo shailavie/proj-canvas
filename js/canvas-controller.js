@@ -13,6 +13,10 @@ function init() {
     console.log(gCtx)
 }
 
+function clearCanvas() {
+    gCanvas.clearRect(0, 0, 500, 500)
+}
+
 function onCanvasMouseDown(ev) {
     saveCoords(ev.offsetX, ev.offsetY)
 }
