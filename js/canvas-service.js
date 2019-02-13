@@ -28,3 +28,9 @@ function updateState(prop, val) {
 function getState(prop) {
     return gState[prop];
 }
+
+
+function downloadCanvas(elLink) {
+    elLink.href = gCanvas.toDataURL()
+    elLink.download = 'my-img.jpg'
+}

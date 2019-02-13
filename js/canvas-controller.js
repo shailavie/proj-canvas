@@ -9,7 +9,7 @@ function init() {
     console.clear();
     gCanvas = document.querySelector('#our-canvas');
     gCtx = gCanvas.getContext('2d')
-    gIsFirstClick = true;
+    // gIsFirstClick = true;
     console.log(gCtx)
 }
 

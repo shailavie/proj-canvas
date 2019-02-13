@@ -28,4 +28,7 @@
 
 .canvas {
     margin: auto;    
+    position: absolute;
+    left: 50%;
+    top: 50%;
 }
