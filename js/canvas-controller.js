@@ -5,4 +5,3 @@ function init() {
 function onStrokeWidthChange(elRange) {
     $('.stroke-width-label').html(elRange.value)
 }
-
