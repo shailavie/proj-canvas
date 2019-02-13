@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var gIsFirstClick;
 var gFirstClickPos;
@@ -6,7 +6,7 @@ var gCanvas;
 var gCtx;
 
 function init() {
-    $('.stroke-width-label').html($('.stroke-width').val())
+    document.querySelector('.stroke-width-label').innerHTML = document.querySelector('.stroke-width').value;
     console.clear();
     gCanvas = document.querySelector('#our-canvas');
     gCtx = gCanvas.getContext('2d')
@@ -17,10 +17,6 @@ function init() {
     // drawTriangle()
     // drawImg()
     // drawText('Have a nice day!')
-}
-
-function onStrokeWidthChange(elRange) {
-    $('.stroke-width-label').html(elRange.value)
 }
 
 function onCanvasClick(ev) {
@@ -52,7 +48,24 @@ function drawShape(x, y) {
     console.log(gFirstClickPos, currPos);
     switch (getState('shape')) {
         case 'rectangle':
-        gCtx.rect(gFirstClickPos.x, gFirstClickPos.y, gFirstClickPos.x - currPos.x, gFirstClickPos.y - currPos.y);
+        gCtx.rect(gFirstClickPos.x, gFirstClickPos.y, currPos.x - gFirstClickPos.x, currPos.y - gFirstClickPos.y);
         gCtx.stroke()
     }
+}
+
+function onStrokeColorChange(elInput) {
+    updateState('strokeColor', elInput.value);
+}
+
+function onFillColorChange(elInput) {
+    updateState('fillColor', elInput.value);
+}
+
+function onStrokeWidthChange(elRange) {
+    updateState('strokeWidth', elRange.value);
+    document.querySelector('.stroke-width-label').innerHTML = (elRange.value);
+}
+
+function onShapeChange(elInput) {
+    updateState('shape', elInput.value);
 }
