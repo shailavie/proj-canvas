@@ -1,7 +1,6 @@
 'use strict';
 
-var gIsFirstClick;
-var gFirstClickPos;
+var gCoordStart;
 var gCanvas;
 var gCtx;
 
@@ -12,32 +11,21 @@ function init() {
     gCtx = gCanvas.getContext('2d')
     gIsFirstClick = true;
     console.log(gCtx)
-
-    // drawCircle()
-    // drawTriangle()
-    // drawImg()
-    // drawText('Have a nice day!')
 }
 
-function onCanvasClick(ev) {
-    // debugger;
-    // console.log(gIsFirstClick)
-    // console.log(ev)
-    if (gIsFirstClick) {
-        saveCoords(ev.offsetX, ev.offsetY);
-        console.log('gFirstClickPos', gFirstClickPos)
-    } else {
-        drawShape(ev.offsetX, ev.offsetY);
-    }
-    gIsFirstClick = !gIsFirstClick;
+function onCanvasMouseDown(ev) {
+    saveCoords(ev.offsetX, ev.offsetY)
+}
+
+function onCanvasMouseUp(ev) {
+    drawShape(ev.offsetX, ev.offsetY);
 }
 
 function saveCoords(x, y) {
-    gFirstClickPos = {
+    gCoordStart = {
         x: x,
         y: y
     }
-    console.log(gFirstClickPos);
 }
 
 function drawShape(x, y) {
@@ -45,10 +33,9 @@ function drawShape(x, y) {
         x: x,
         y: y
     }
-    console.log(gFirstClickPos, currPos);
     switch (getState('shape')) {
         case 'rectangle':
-        gCtx.rect(gFirstClickPos.x, gFirstClickPos.y, currPos.x - gFirstClickPos.x, currPos.y - gFirstClickPos.y);
+        gCtx.rect(gCoordStart.x, gCoordStart.y, currPos.x - gCoordStart.x, currPos.y - gCoordStart.y);
         gCtx.stroke()
     }
 }
