@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>page title</title>
     <!-- <link rel="stylesheet" href="lib/bootstrap/bootstrap.css" /> -->
     <link rel="stylesheet" href="lib/animate/animate.css" />
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="icon" href="img/icon.png" type="image/gif" sizes="16x16">
+    <link rel="icon" href="img/logo.png" type="image/gif" sizes="16x16">
+    <title>Hopa Canvas</title>
 </head>
 
 <body onload="init()">
@@ -21,17 +21,25 @@
             fill color:
             <input type="color" name="fill-color" value="#ffffff" onchange="onFillColorChange(this)">
         </label>
-            <span class="stroke-width-label"></span>
-            <input type="range" name="stroke-width" min="1" max="30" onchange="onStrokeWidthChange(this)" class="stroke-width">
+        <span class="stroke-width-label"></span>
+        <input type="range" name="stroke-width" min="1" max="30" onchange="onStrokeWidthChange(this)"
+            class="stroke-width">
         <select name="shape" onchange="onShapeChange(this)">
-            <option value="rectangle">Rectangle</option>
-            <option value="oval">Oval</option>
+            <option value="pen">Pen</option>
+            <!-- <option value="rectangle">Rectangle</option>
+            <option value="oval">Oval</option> -->
         </select>
-       <div class="save"> <a href="" class="a-save" type="button" onclick="downloadCanvas(this)">Save</a></div>
-        
+        <div class="save"> <a href="" class="a-save" type="button" onclick="downloadCanvas(this)">Save</a></div>
+        <button onclick="clearCanvas()">Clear</button>
+
     </div>
     <div class="canvas-container">
-        <canvas id="our-canvas"  width="500" height="400" style="border:1px solid black" onmousedown="onCanvasMouseDown(event)" onmouseup="onCanvasMouseUp(event)"></canvas>
+        <canvas id="canvas" width="500" height="400" style="border:1px solid black"
+        onmousedown="onCanvasMouseDown(event)"
+        onmousemove="onCanvasMouseMove(event)"    
+        onmouseup="onCanvasMouseUp(event)"
+        >
+        </canvas>
     </div>
     <script src="js/util.js"></script>
     <script src="lib/jquery/jquery.js"></script>
